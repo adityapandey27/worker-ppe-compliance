@@ -18,6 +18,8 @@ const app = express();
 
 connectDB();
 
+
+console.log("CLIENT_ORIGIN=======",process.env.CLIENT_ORIGIN )
 // Middleware
 const allowedOrigins = (
   process.env.CLIENT_ORIGIN || "http://localhost:5173"
