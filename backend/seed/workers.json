@@ -1,0 +1,402 @@
+[
+  {
+    "name": "Praveen Sharma",
+    "workerId": "WRK0001",
+    "jobProfile": "Forklift Operator",
+    "department": "Warehouse & Logistics",
+    "mobileNumber": "7218196001",
+    "aadharNumber": "3389 0838 6379"
+  },
+  {
+    "name": "Swati Bose",
+    "workerId": "WRK0002",
+    "jobProfile": "Machine Operator",
+    "department": "Maintenance",
+    "mobileNumber": "9542351161",
+    "aadharNumber": "5594 0781 6184"
+  },
+  {
+    "name": "Yamini Chatterjee",
+    "workerId": "WRK0003",
+    "jobProfile": "Supervisor",
+    "department": "Human Resources",
+    "mobileNumber": "7103413164",
+    "aadharNumber": "7525 5341 9283"
+  },
+  {
+    "name": "Priya Tiwari",
+    "workerId": "WRK0004",
+    "jobProfile": "Painter",
+    "department": "Electrical",
+    "mobileNumber": "7503056413",
+    "aadharNumber": "9537 6724 2388"
+  },
+  {
+    "name": "Nisha Rao",
+    "workerId": "WRK0005",
+    "jobProfile": "Security Guard",
+    "department": "Packaging",
+    "mobileNumber": "9532871012",
+    "aadharNumber": "2691 6697 8480"
+  },
+  {
+    "name": "Praveen Menon",
+    "workerId": "WRK0006",
+    "jobProfile": "Store Keeper",
+    "department": "Electrical",
+    "mobileNumber": "8146270482",
+    "aadharNumber": "8148 9325 2880"
+  },
+  {
+    "name": "Tanvi Chauhan",
+    "workerId": "WRK0007",
+    "jobProfile": "Crane Operator",
+    "department": "Production",
+    "mobileNumber": "6543039117",
+    "aadharNumber": "1822 7824 8963"
+  },
+  {
+    "name": "Kavya Das",
+    "workerId": "WRK0008",
+    "jobProfile": "Quality Inspector",
+    "department": "Electrical",
+    "mobileNumber": "9578713315",
+    "aadharNumber": "0983 9301 0310"
+  },
+  {
+    "name": "Gopal Gupta",
+    "workerId": "WRK0009",
+    "jobProfile": "Packing Assistant",
+    "department": "Warehouse & Logistics",
+    "mobileNumber": "8738299737",
+    "aadharNumber": "6311 6566 7010"
+  },
+  {
+    "name": "Pankaj Rao",
+    "workerId": "WRK0010",
+    "jobProfile": "Maintenance Technician",
+    "department": "Quality Control",
+    "mobileNumber": "7338726247",
+    "aadharNumber": "3178 1080 1326"
+  },
+  {
+    "name": "Chitra Agarwal",
+    "workerId": "WRK0011",
+    "jobProfile": "Quality Inspector",
+    "department": "Packaging",
+    "mobileNumber": "6260647468",
+    "aadharNumber": "7234 3098 0500"
+  },
+  {
+    "name": "Radha Agarwal",
+    "workerId": "WRK0012",
+    "jobProfile": "Packing Assistant",
+    "department": "Housekeeping",
+    "mobileNumber": "7081219136",
+    "aadharNumber": "1939 9091 6998"
+  },
+  {
+    "name": "Manish Mukherjee",
+    "workerId": "WRK0013",
+    "jobProfile": "Forklift Operator",
+    "department": "Warehouse & Logistics",
+    "mobileNumber": "8346247510",
+    "aadharNumber": "7991 1838 4251"
+  },
+  {
+    "name": "Divya Rathore",
+    "workerId": "WRK0014",
+    "jobProfile": "Assembly Line Worker",
+    "department": "Maintenance",
+    "mobileNumber": "9849808412",
+    "aadharNumber": "4118 2449 3534"
+  },
+  {
+    "name": "Farida Agarwal",
+    "workerId": "WRK0015",
+    "jobProfile": "Forklift Operator",
+    "department": "Production",
+    "mobileNumber": "6640052427",
+    "aadharNumber": "8680 1128 0598"
+  },
+  {
+    "name": "Sandeep Pandey",
+    "workerId": "WRK0016",
+    "jobProfile": "Carpenter",
+    "department": "Production",
+    "mobileNumber": "8505331586",
+    "aadharNumber": "9232 2602 5634"
+  },
+  {
+    "name": "Priya Bose",
+    "workerId": "WRK0017",
+    "jobProfile": "Plumber",
+    "department": "Packaging",
+    "mobileNumber": "6733754330",
+    "aadharNumber": "3654 1458 6850"
+  },
+  {
+    "name": "Praveen Chatterjee",
+    "workerId": "WRK0018",
+    "jobProfile": "Forklift Operator",
+    "department": "Maintenance",
+    "mobileNumber": "8019655698",
+    "aadharNumber": "1693 4060 8835"
+  },
+  {
+    "name": "Tarun Gupta",
+    "workerId": "WRK0019",
+    "jobProfile": "Maintenance Technician",
+    "department": "Human Resources",
+    "mobileNumber": "8148465648",
+    "aadharNumber": "2366 2994 6804"
+  },
+  {
+    "name": "Preeti Mishra",
+    "workerId": "WRK0020",
+    "jobProfile": "Mason",
+    "department": "Human Resources",
+    "mobileNumber": "8777387214",
+    "aadharNumber": "8951 3433 2003"
+  },
+  {
+    "name": "Aarti Kapoor",
+    "workerId": "WRK0021",
+    "jobProfile": "Electrician",
+    "department": "Safety & Security",
+    "mobileNumber": "9936763201",
+    "aadharNumber": "6328 7083 1727"
+  },
+  {
+    "name": "Indira Chopra",
+    "workerId": "WRK0022",
+    "jobProfile": "Housekeeping Staff",
+    "department": "Civil & Construction",
+    "mobileNumber": "9986872774",
+    "aadharNumber": "3487 3471 4345"
+  },
+  {
+    "name": "Manish Chatterjee",
+    "workerId": "WRK0023",
+    "jobProfile": "Store Keeper",
+    "department": "Quality Control",
+    "mobileNumber": "7236231665",
+    "aadharNumber": "8760 3669 0967"
+  },
+  {
+    "name": "Amit Rathore",
+    "workerId": "WRK0024",
+    "jobProfile": "Assembly Line Worker",
+    "department": "Packaging",
+    "mobileNumber": "9889373467",
+    "aadharNumber": "0656 2729 8069"
+  },
+  {
+    "name": "Nandini Menon",
+    "workerId": "WRK0025",
+    "jobProfile": "Machine Operator",
+    "department": "Quality Control",
+    "mobileNumber": "9272046537",
+    "aadharNumber": "5564 6417 0805"
+  },
+  {
+    "name": "Geeta Nair",
+    "workerId": "WRK0026",
+    "jobProfile": "Electrician",
+    "department": "Production",
+    "mobileNumber": "6330923271",
+    "aadharNumber": "9374 5299 1241"
+  },
+  {
+    "name": "Radha Sharma",
+    "workerId": "WRK0027",
+    "jobProfile": "Assembly Line Worker",
+    "department": "Human Resources",
+    "mobileNumber": "9631931491",
+    "aadharNumber": "9058 6518 5067"
+  },
+  {
+    "name": "Naveen Pandey",
+    "workerId": "WRK0028",
+    "jobProfile": "Supervisor",
+    "department": "Safety & Security",
+    "mobileNumber": "7628498776",
+    "aadharNumber": "9453 1473 7996"
+  },
+  {
+    "name": "Harish Sharma",
+    "workerId": "WRK0029",
+    "jobProfile": "Crane Operator",
+    "department": "Civil & Construction",
+    "mobileNumber": "7735454948",
+    "aadharNumber": "0831 3678 3777"
+  },
+  {
+    "name": "Rajesh Gupta",
+    "workerId": "WRK0030",
+    "jobProfile": "Assembly Line Worker",
+    "department": "Warehouse & Logistics",
+    "mobileNumber": "9349578856",
+    "aadharNumber": "8557 4443 1351"
+  },
+  {
+    "name": "Jyoti Das",
+    "workerId": "WRK0031",
+    "jobProfile": "Fitter",
+    "department": "Warehouse & Logistics",
+    "mobileNumber": "7749894134",
+    "aadharNumber": "3524 0824 0084"
+  },
+  {
+    "name": "Vijay Nair",
+    "workerId": "WRK0032",
+    "jobProfile": "Crane Operator",
+    "department": "Quality Control",
+    "mobileNumber": "6947775204",
+    "aadharNumber": "7116 7190 2294"
+  },
+  {
+    "name": "Suresh Patel",
+    "workerId": "WRK0033",
+    "jobProfile": "Plumber",
+    "department": "Housekeeping",
+    "mobileNumber": "9999386774",
+    "aadharNumber": "9649 9091 3341"
+  },
+  {
+    "name": "Priya Patel",
+    "workerId": "WRK0034",
+    "jobProfile": "Fitter",
+    "department": "Housekeeping",
+    "mobileNumber": "6206797403",
+    "aadharNumber": "4471 3493 6183"
+  },
+  {
+    "name": "Rakesh Mukherjee",
+    "workerId": "WRK0035",
+    "jobProfile": "Forklift Operator",
+    "department": "Maintenance",
+    "mobileNumber": "6024994717",
+    "aadharNumber": "4648 8771 9065"
+  },
+  {
+    "name": "Uma Reddy",
+    "workerId": "WRK0036",
+    "jobProfile": "Machine Operator",
+    "department": "Quality Control",
+    "mobileNumber": "7990490278",
+    "aadharNumber": "7429 6717 5655"
+  },
+  {
+    "name": "Naveen Ghosh",
+    "workerId": "WRK0037",
+    "jobProfile": "Fitter",
+    "department": "Civil & Construction",
+    "mobileNumber": "9746807154",
+    "aadharNumber": "5168 0876 0385"
+  },
+  {
+    "name": "Yamini Das",
+    "workerId": "WRK0038",
+    "jobProfile": "Crane Operator",
+    "department": "Safety & Security",
+    "mobileNumber": "6348247710",
+    "aadharNumber": "9324 8086 1317"
+  },
+  {
+    "name": "Ajay Nair",
+    "workerId": "WRK0039",
+    "jobProfile": "Carpenter",
+    "department": "Safety & Security",
+    "mobileNumber": "8846773782",
+    "aadharNumber": "6398 2146 5840"
+  },
+  {
+    "name": "Preeti Rao",
+    "workerId": "WRK0040",
+    "jobProfile": "Assembly Line Worker",
+    "department": "Human Resources",
+    "mobileNumber": "9278755886",
+    "aadharNumber": "7533 9636 0576"
+  },
+  {
+    "name": "Nitin Menon",
+    "workerId": "WRK0041",
+    "jobProfile": "Carpenter",
+    "department": "Safety & Security",
+    "mobileNumber": "6289517187",
+    "aadharNumber": "0262 1745 9615"
+  },
+  {
+    "name": "Jyoti Joshi",
+    "workerId": "WRK0042",
+    "jobProfile": "Maintenance Technician",
+    "department": "Safety & Security",
+    "mobileNumber": "6913431611",
+    "aadharNumber": "7240 0504 5562"
+  },
+  {
+    "name": "Divya Bansal",
+    "workerId": "WRK0043",
+    "jobProfile": "Mason",
+    "department": "Human Resources",
+    "mobileNumber": "7221969379",
+    "aadharNumber": "2374 7407 4821"
+  },
+  {
+    "name": "Umesh Rathore",
+    "workerId": "WRK0044",
+    "jobProfile": "Security Guard",
+    "department": "Electrical",
+    "mobileNumber": "9474367136",
+    "aadharNumber": "9594 4064 0909"
+  },
+  {
+    "name": "Deepa Sen",
+    "workerId": "WRK0045",
+    "jobProfile": "Assembly Line Worker",
+    "department": "Warehouse & Logistics",
+    "mobileNumber": "8339421047",
+    "aadharNumber": "0952 1456 2328"
+  },
+  {
+    "name": "Kunal Bansal",
+    "workerId": "WRK0046",
+    "jobProfile": "Packing Assistant",
+    "department": "Electrical",
+    "mobileNumber": "7474517123",
+    "aadharNumber": "6851 6048 1754"
+  },
+  {
+    "name": "Radha Joshi",
+    "workerId": "WRK0047",
+    "jobProfile": "Supervisor",
+    "department": "Quality Control",
+    "mobileNumber": "7709859317",
+    "aadharNumber": "4612 0047 1138"
+  },
+  {
+    "name": "Arun Joshi",
+    "workerId": "WRK0048",
+    "jobProfile": "Rigger",
+    "department": "Civil & Construction",
+    "mobileNumber": "9926179640",
+    "aadharNumber": "5377 3515 8506"
+  },
+  {
+    "name": "Swati Mishra",
+    "workerId": "WRK0049",
+    "jobProfile": "Plumber",
+    "department": "Safety & Security",
+    "mobileNumber": "6390053293",
+    "aadharNumber": "1839 3352 9042"
+  },
+  {
+    "name": "Vijay Chopra",
+    "workerId": "WRK0050",
+    "jobProfile": "Forklift Operator",
+    "department": "Maintenance",
+    "mobileNumber": "6020539502",
+    "aadharNumber": "4026 8117 7589"
+  }
+]

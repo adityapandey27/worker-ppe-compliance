@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> PPE Compliance Monitoring</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ink: '#0B1220',
+              inkline: '#151F30',
+              app: '#F3F5F8',
+              amber: '#F5A623',
+              danger: '#E5484D',
+              ok: '#21A366',
+              accent: '#3B6FE0',
+              muted: '#5C6470'
+            },
+            fontFamily: {
+              display: ['"Space Grotesk"', 'sans-serif'],
+              body: ['"Inter"', 'sans-serif'],
+              mono: ['"IBM Plex Mono"', 'monospace']
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      body { font-family: 'Inter', sans-serif; background-color: #F3F5F8; }
+      .font-display { font-family: 'Space Grotesk', sans-serif; }
+      .font-mono { font-family: 'IBM Plex Mono', monospace; }
+      @keyframes beacon-pulse {
+        0% { box-shadow: 0 0 0 0 rgba(229, 72, 77, 0.55); }
+        70% { box-shadow: 0 0 0 8px rgba(229, 72, 77, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(229, 72, 77, 0); }
+      }
+      .beacon { animation: beacon-pulse 1.8s infinite; }
+      @keyframes beacon-pulse-amber {
+        0% { box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.55); }
+        70% { box-shadow: 0 0 0 8px rgba(245, 166, 35, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(245, 166, 35, 0); }
+      }
+      .beacon-amber { animation: beacon-pulse-amber 1.8s infinite; }
+      ::-webkit-scrollbar { width: 8px; height: 8px; }
+      ::-webkit-scrollbar-thumb { background: #cbd2dc; border-radius: 8px; }
+    </style>
+  </head>
+  <body class="bg-app text-ink">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
