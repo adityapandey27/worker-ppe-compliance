@@ -19,15 +19,25 @@ export const AuthProvider = ({ children }) => {
       .finally(() => setLoading(false));
   }, []);
 
+  
   const login = async (email, password) => {
-    const res = await api.post("/auth/login", { email, password });
-    setUser(res.data.user);
-    return res.data.user;
+    try {
+      const response = await api.post('/auth/login', { email, password });
+      const { user } = response.data;
+      setUser(user);
+      return user;
+    } catch (error) {
+      throw error;
+    }
   };
 
   const logout = async () => {
-    await api.post("/auth/logout");
-    setUser(null);
+    try {
+      await api.post('/auth/logout');
+      setUser(null);
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   };
 
   return (

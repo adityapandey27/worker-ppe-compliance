@@ -1,18 +1,12 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  baseURL: import.meta.env.VITE_API_URL|| 'https://worker-ppe-compliance.onrender.com/api',
   withCredentials: true,
 });
 
-// Attach the JWT (if present) to every outgoing request
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('siteguard_token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
+// || 'https://worker-ppe-compliance.onrender.com/api',
+
 
 // Auto-logout on 401 (expired/invalid token)
 api.interceptors.response.use(

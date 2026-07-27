@@ -10,20 +10,20 @@ const Login = () => {
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    setSubmitting(true);
-    try {
-      const user = await login(email, password);
-      navigate(user.role === 'admin' ? '/admin/dashboard' : '/supervisor/dashboard');
-    } catch (err) {
-      setError(err.response?.data?.message || 'Login failed. Check your credentials.');
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
+  
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError('');
+  setSubmitting(true);
+  try {
+    const user = await login(email, password);
+    navigate(user.role === 'admin' ? '/admin/dashboard' : '/supervisor/dashboard');
+  } catch (err) {
+    setError(err.response?.data?.message || 'Login failed. Check your credentials.');
+  } finally {
+    setSubmitting(false);
+  }
+};
   const fillDemo = (role) => {
     if (role === 'admin') {
       setEmail('admin@ppe.com');
