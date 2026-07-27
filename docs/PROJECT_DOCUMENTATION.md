@@ -19,12 +19,16 @@ a provided worker dataset and driven by simulated IoT non-compliance events.
 
 - **Frontend:** React 18 + Vite + React Router. Tailwind (CDN) for styling,
   Recharts for the Data Insights charts. A single `AuthContext` holds the logged-in
-  user and JWT; `ProtectedRoute` enforces both "must be logged in" and "must have
-  role X" at the route level, mirroring the server-side checks.
+  `user` object (fetched via `GET /api/auth/me` on load); `ProtectedRoute` enforces
+  both "must be logged in" and "must have role X" at the route level, mirroring the
+  server-side checks. The JWT itself is never held by the frontend — it lives only
+  in an httpOnly cookie set by the backend, so JS on the page can't read or leak it.
 - **Backend:** Express, organized by feature (`routes` → `controllers`), with
   Mongoose models for `User`, `Worker`, `Violation`. Two middleware functions,
-  `protect` (verifies JWT) and `authorize(...roles)` (role gate), are composed on
-  every private route.
+  `protect` (reads the JWT from the `token` cookie via `cookie-parser` and verifies
+  it) and `authorize(...roles)` (role gate), are composed on every private route.
+  Auth uses an httpOnly, `SameSite=None; Secure` cookie rather than a bearer token
+  in `localStorage` — see 3.3 below for the reasoning and trade-offs.
 - **Database:** MongoDB. Chosen per the requested stack; document model fits well
   since violations are naturally independent, high-write, denormalized documents
   (each stores `department`/`site` directly rather than requiring a join to render
@@ -51,14 +55,38 @@ around in real time. In a production deployment, this endpoint (or an equivalent
 ingestion route) would instead be called by actual IoT gateways/devices, and the
 manual trigger would be removed or restricted to a staging environment.
 
-### 3.3 Role separation
+### 3.3 Session storage: httpOnly cookie vs. Bearer token
+The JWT is delivered via an **httpOnly cookie** (`Set-Cookie: token=...`), not
+returned in the login response body or stored in `localStorage`. Concretely:
+- On login, the server sets `token` as `httpOnly; secure; sameSite=none`, and the
+  frontend never sees the raw token — every subsequent request just needs
+  `withCredentials: true` (axios) for the browser to attach it automatically.
+- This is a deliberate improvement over a `localStorage`-held bearer token: an
+  httpOnly cookie **can't be read by JavaScript**, which closes off the most common
+  way a stolen/XSS'd script would exfiltrate a session token. `localStorage` has no
+  such protection — any script running on the page (including a compromised
+  dependency) can read it.
+- The trade-off: because the frontend (Netlify) and backend (Render) are on
+  different domains, the cookie must be `SameSite=None`, which some browsers'
+  privacy settings treat as "third-party" and may block depending on the user's
+  configuration (Safari ITP, and increasingly Chrome). The app was verified working
+  cross-browser after deployment; a fully same-origin setup (e.g. proxying `/api`
+  through the frontend host) would remove this class of risk entirely and is a
+  reasonable next step if browser compatibility issues arise in practice.
+- CORS (`cors` middleware) is configured with an explicit origin allowlist and
+  `credentials: true`, which is required for cookies to be accepted cross-origin at
+  all — a wildcard (`origin: '*'`) origin cannot be combined with credentialed
+  requests per the CORS spec, so the allowlist isn't just a security nicety here,
+  it's a functional requirement.
+
+### 3.4 Role separation
 Roles are enforced twice: once in the JWT-derived `req.user.role` on the server
 (the actual security boundary), and once in the React router (`ProtectedRoute`) for
 UX (so a supervisor is redirected, not shown a raw 403 page). Admin-only vs.
 supervisor-only endpoints are grouped in dedicated routers so the authorization
 rule is visible at a glance rather than scattered per-handler.
 
-### 3.4 PII handling for Aadhar numbers
+### 3.5 PII handling for Aadhar numbers
 The dataset includes Aadhar (Indian national ID) numbers. Since these are
 sensitive personal identifiers, the `Worker` model masks them (`XXXX XXXX 6379`)
 in every JSON response via a Mongoose `toJSON` transform, rather than exposing the
@@ -66,7 +94,7 @@ full number to the frontend. This is a reasonable default for a compliance
 dashboard where the full number isn't operationally needed; a real system would
 likely encrypt it at rest and only decrypt for authorized, audited access.
 
-### 3.5 Denormalized `department`/`site` on `Violation`
+### 3.6 Denormalized `department`/`site` on `Violation`
 Each violation stores a copy of the worker's `department`/`site` at the time it
 was recorded. This trades a small amount of duplication for much simpler/faster
 filtering and aggregation (department breakdowns, department filters on
@@ -96,10 +124,20 @@ write-once, read-many event log.
 ## 5. Security notes
 
 - Passwords are hashed with bcrypt (`bcryptjs`), never stored or returned in plain text.
-- JWTs are signed server-side (`JWT_SECRET`) and expire after 8 hours by default.
+- JWTs are signed server-side (`JWT_SECRET`) and expire after 8 hours by default,
+  matching the session cookie's `maxAge`.
+- The JWT is delivered as an **httpOnly cookie**, not exposed to frontend
+  JavaScript or persisted in `localStorage` — this significantly limits the blast
+  radius of an XSS vulnerability, since a malicious script on the page cannot read
+  or exfiltrate the session token (see 3.3 for the full trade-off discussion).
+- The cookie is also `secure` (HTTPS-only) and `sameSite=none` (required for the
+  cross-origin Netlify ↔ Render deployment); logout explicitly clears it via
+  `res.clearCookie` with matching attributes.
 - `User.password` has `select: false` in the schema — it's never returned unless
   explicitly requested (login flow).
-- CORS is restricted to `CLIENT_ORIGIN` (configurable), not left wide open.
+- CORS uses an explicit origin allowlist (`CLIENT_ORIGIN`) plus `credentials: true`,
+  rather than a wildcard — required for cookies to be sent/accepted cross-origin at
+  all, and prevents arbitrary sites from making credentialed requests to the API.
 - Role checks happen server-side on every private route — the frontend guard is a
   UX convenience, not the security boundary.
 
@@ -120,7 +158,7 @@ write-once, read-many event log.
 | Requirement | Implementation |
 |---|---|
 | Import/seed provided dataset | `backend/seed/workers.json` + `backend/seed/seed.js` |
-| JWT auth, role-based access | `middleware/auth.js` (`protect`, `authorize`), `authController.js` |
+| JWT auth (httpOnly cookie), role-based access | `middleware/auth.js` (`protect`, `authorize`), `authController.js`, `cookie-parser` |
 | Admin: Dashboard | `GET /api/dashboard/admin` → `pages/admin/Dashboard.jsx` |
 | Admin: Users (create supervisors) | `POST /api/users` → `pages/admin/Users.jsx` |
 | Admin: Alerts (unacknowledged > 10 min) | `GET /api/violations/alerts` → `pages/admin/Alerts.jsx` |
