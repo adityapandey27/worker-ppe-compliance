@@ -143,6 +143,7 @@ calling `POST /api/violations/simulate` (or a dedicated ingestion endpoint) dire
 | `DEFAULT_ADMIN_EMAIL` / `DEFAULT_ADMIN_PASSWORD` | Seeded admin credentials | `admin@ppe.com` / `Admin@123` |
 | `ESCALATION_MINUTES` | Minutes before a pending violation escalates to Admin Alerts | `10` |
 | `CLIENT_ORIGIN` | Allowed CORS origin(s), comma separated | `http://localhost:5173` |
+| `NODE_ENV` | Helps updating the creditinal based on the server current environment  | `development` / `production` |
 
 ### frontend/.env
 | Variable | Description | Default |
