@@ -33,20 +33,21 @@ const login = async (req, res) => {
     const token = generateToken(user);
 
     // ✅ Cookie configuration
-    const isProduction = process.env.NODE_ENV === 'production';
-    
+    const isProduction = process.env.NODE_ENV === "production";
+
     res.cookie("token", token, {
       httpOnly: true,
-      secure: isProduction,
-      sameSite: isProduction ? "none" : "lax",
+      secure: true,
+      sameSite: "none",
       maxAge: 24 * 60 * 60 * 1000,
+      path: "/",
     });
 
     res.json({
       user: user.toSafeObject(),
     });
   } catch (err) {
-    console.error('Login error:', err);
+    console.error("Login error:", err);
     res.status(500).json({
       message: "Login failed.",
       error: err.message,
@@ -55,12 +56,12 @@ const login = async (req, res) => {
 };
 
 const logout = (req, res) => {
-   const isProduction = process.env.NODE_ENV === 'production';
- res.clearCookie("token", {
+  const isProduction = process.env.NODE_ENV === "production";
+  res.clearCookie("token", {
     httpOnly: true,
     secure: isProduction,
     sameSite: isProduction ? "none" : "lax",
-    path: '/',
+    path: "/",
   });
 
   res.json({
