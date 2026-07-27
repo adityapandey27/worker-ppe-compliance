@@ -21,6 +21,7 @@ connectDB();
 
 console.log("CLIENT_ORIGIN=======",process.env.CLIENT_ORIGIN )
 console.log("MONGO_URI=======",process.env.MONGO_URI )
+console.log(" process.env.NODE_ENV=======", process.env.NODE_ENV )
 // Middleware
 const allowedOrigins = (
   process.env.CLIENT_ORIGIN || "http://localhost:5173" 
