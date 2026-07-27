@@ -2,21 +2,38 @@
 
 Base URL (local): `http://localhost:5000/api`
 
-All protected endpoints require:
-```
-Authorization: Bearer <JWT>
-```
-Tokens are issued by `POST /api/auth/login` and expire after `JWT_EXPIRES_IN` (default 8h).
+Authentication is **cookie-based**: `POST /api/auth/login` issues the JWT as an
+`httpOnly` cookie (`token`), which the browser attaches automatically to every
+subsequent request to the API — the frontend never reads or stores the token
+itself. All requests from the browser to protected endpoints must be made with
+`withCredentials: true` (axios) so the cookie is sent and accepted.
+
+Tokens expire after `JWT_EXPIRES_IN` (default 8h), matching the cookie's `maxAge`.
 
 Error responses follow the shape `{ "message": "..." }` (validation/server errors may
 also include `"error"`).
+
+**Cookie attributes** (set on login, cleared on logout):
+| Attribute | Value | Why |
+|---|---|---|
+| `httpOnly` | `true` | Not readable/writable from JS — mitigates XSS token theft |
+| `secure` | `true` | Only sent over HTTPS |
+| `sameSite` | `none` | Required for the cross-origin frontend (Netlify) ↔ backend (Render) setup; requires `secure: true` |
+| `maxAge` | `24h` | Cookie lifetime |
+| `path` | `/` | Sent on all API routes |
+
+> **Note:** `SameSite=None` cookies are treated as third-party by some browsers'
+> privacy settings (notably Safari's ITP and increasingly Chrome), which can block
+> them depending on the user's browser configuration. This is a known trade-off of
+> a fully cross-origin (different domain) frontend/backend split; see
+> `PROJECT_DOCUMENTATION.md` for the reasoning and alternatives considered.
 
 ---
 
 ## Auth
 
 ### `POST /api/auth/login`
-Public. Authenticates a user and returns a JWT.
+Public. Authenticates a user and sets the JWT as an httpOnly cookie.
 
 **Body**
 ```json
@@ -25,14 +42,22 @@ Public. Authenticates a user and returns a JWT.
 **200 Response**
 ```json
 {
-  "token": "eyJhbGciOi...",
   "user": { "id": "...", "name": "System Admin", "email": "admin@ppe.com", "role": "admin", "site": "Head Office", "isActive": true, "createdAt": "..." }
 }
 ```
+The JWT itself is **not** returned in the response body — it travels only in the
+`Set-Cookie` response header.
+
 **401** — invalid credentials or inactive account.
 
+### `POST /api/auth/logout`
+Auth: any logged-in user. Clears the `token` cookie.
+**200** → `{ "message": "Logged out" }`
+
 ### `GET /api/auth/me`
-Auth: any logged-in user. Returns the current user (used to restore a session on page reload).
+Auth: any logged-in user (cookie sent automatically). Returns the current user —
+used on app load to restore a session after a page refresh, since there's no
+token in `localStorage` to check client-side.
 
 ---
 
@@ -199,7 +224,7 @@ Public. `{ "status": "ok", "time": "..." }` — useful for uptime checks on free
 | 200 | Success |
 | 201 | Resource created |
 | 400 | Bad request / validation error |
-| 401 | Missing/invalid/expired token, or bad credentials |
+| 401 | Missing/invalid/expired token (cookie not sent or rejected), or bad credentials |
 | 403 | Authenticated but wrong role for this endpoint |
 | 404 | Resource not found |
 | 409 | Conflict (e.g. duplicate email) |
