@@ -2,6 +2,7 @@ const User = require("../models/User");
 const generateToken = require("../utils/generateToken");
 
 const login = async (req, res) => {
+  console.log("Login request received:", req.body);
   try {
     const { email, password } = req.body;
 
@@ -31,10 +32,13 @@ const login = async (req, res) => {
 
     const token = generateToken(user);
 
+    // ✅ Cookie configuration
+    const isProduction = process.env.NODE_ENV === 'production';
+    
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false, // localhost
-      sameSite: "lax",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
       maxAge: 24 * 60 * 60 * 1000,
     });
 
@@ -42,6 +46,7 @@ const login = async (req, res) => {
       user: user.toSafeObject(),
     });
   } catch (err) {
+    console.error('Login error:', err);
     res.status(500).json({
       message: "Login failed.",
       error: err.message,
@@ -50,7 +55,13 @@ const login = async (req, res) => {
 };
 
 const logout = (req, res) => {
-  res.clearCookie("token");
+   const isProduction = process.env.NODE_ENV === 'production';
+ res.clearCookie("token", {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "lax",
+    path: '/',
+  });
 
   res.json({
     message: "Logged out",

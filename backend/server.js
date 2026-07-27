@@ -23,13 +23,24 @@ console.log("CLIENT_ORIGIN=======",process.env.CLIENT_ORIGIN )
 console.log("MONGO_URI=======",process.env.MONGO_URI )
 // Middleware
 const allowedOrigins = (
-  process.env.CLIENT_ORIGIN || "http://localhost:5173"
+  process.env.CLIENT_ORIGIN || "http://localhost:5173" 
 ).split(",");
-
+// https://compliance-ppe.netlify.app
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        console.log('❌ CORS blocked origin:', origin);
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   })
 );
 
